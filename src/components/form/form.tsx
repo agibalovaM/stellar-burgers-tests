@@ -82,7 +82,8 @@ export const Form: FC<IFormProps> = ({ setMode, className }) => {
   const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
 
-    const formElements = event.currentTarget.elements as typeof event.currentTarget.elements & {
+    const formElements = event.currentTarget
+      .elements as typeof event.currentTarget.elements & {
       name: HTMLInputElement;
       email: HTMLInputElement;
       password: HTMLInputElement;
@@ -171,10 +172,7 @@ export const Form: FC<IFormProps> = ({ setMode, className }) => {
           value={values.password}
           onChange={handleChange}
           onBlur={handleBlur}
-          extraClass={clsx(
-            styles.input,
-            errors.password && styles.input_error
-          )}
+          extraClass={clsx(styles.input, errors.password && styles.input_error)}
           data-testid='password-input'
           required
         />
@@ -195,7 +193,12 @@ export const Form: FC<IFormProps> = ({ setMode, className }) => {
         {errors.repeatPassword && (
           <p className='input__error'>{errors.repeatPassword}</p>
         )}
-        <Button htmlType='submit' type='primary' size='medium' disabled={isSubmitDisabled}>
+        <Button
+          htmlType='submit'
+          type='primary'
+          size='medium'
+          disabled={isSubmitDisabled}
+        >
           Зарегистрироваться
         </Button>
       </fieldset>
